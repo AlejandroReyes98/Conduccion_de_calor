@@ -33,17 +33,22 @@ def PrePar():
     
     a = float(input(' Punto inicial a = '))
     b = float(input(' Punto final b = '))
-    N = int(input('Número de nodos, N = '))
+    N = int(input('Número de nodos N = '))
     L = ( b - a )
     h = L / (N + 1)
     Ta = float(input('Temperatura en a = '))
     Tb = float(input('Temperatura en b = '))
     k = float(input('Valor de la conductividad térmica k =  '))
     Q = []
-    for i in range(N):
-        Q.append(float(input("Ingresa los valores de Q (0 a N) = ")))
-    
-    #Q = float(input('Valor del sumidero o fuente Q = '))
+    tipo = int(input('¿Tu sistema tiene simideros o fuentes? (sí --> 1 ; no --> 2) \n'))
+    if tipo == 1:
+        for i in range(N):
+            Q.append(float(input("Ingresa los valores de Q (0 a N) = ")))
+            #Q = float(input('Valor del sumidero o fuente Q = '))
+    elif tipo == 2:
+        Q = np.zeros(N)
+    else:
+        print('Número inválido')
     f=int(input('Valor de la diagonal constante f para calibrar = '))
     r = k / (h**2)
     diag = (((h**2)*(f**2)) - 2)
