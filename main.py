@@ -48,7 +48,8 @@ print(x)
 
 
 #GRAFICA
-plt.plot(x,U, '-bo')
+plt.plot(x,U,'or' )
+plt.rcParams["figure.figsize"] = (5, 1)
 plt.xlabel('Dominio')
 plt.ylabel('Temperatura')
 plt.title('Condución de calor')
@@ -56,3 +57,4 @@ plt.title('Condución de calor')
 plt.show()
 #graf = grafica(int(datos[0]), int(datos[1]), N, U)
 #print(np.matrix(A))
+
