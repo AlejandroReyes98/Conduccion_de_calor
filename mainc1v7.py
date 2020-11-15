@@ -52,7 +52,7 @@ x= f.EspaNume(datos)
 #Problema 1
 #Matriz Q
 
-MatrizQ=f.MatQC1(datos)       # Lado derecho
+MatrizQ = f.MatQC1(datos)       # Lado derecho
 #Matriz f 
 MatCondiciones = f.MatDirichlet(datos)
 #Matriz b

@@ -13,11 +13,10 @@ V E R S I O N   6        12/11/2020
 para el primer problema
     -IMPORTANTE: El archivo con el que probe es PARAMETROS
     Tiene este formato:
-PuntoInicial PuntoFinal Nodos CondicionDirchA CondicionDirchB K Q
-
-PuntoInicial PuntoFinal Nodos CondicionDirchA CondicionDirchB f
-
-
+    PROBLEMA 1
+        PuntoInicial PuntoFinal Nodos CondicionDirchA CondicionDirchB K Q
+    CALIBRACIÓN 1
+        PuntoInicial PuntoFinal Nodos CondicionDirchA CondicionDirchB f b
 (Son ESPACIOS, esto es importante)    
 -Como van a ser programas principales diferentes para cada problema
 -Inserte una funcion de Titulo gg
@@ -36,6 +35,7 @@ I    M    P   O   R   T   A   N   T   E:
         d[2]: Numero de nodos. 
         d[3]: Longitud del segmento L.
         d[4]: Tamanio de la malla h.
+        
         En el problema 1:
         d[5]: Condición Dirichlet en A.
         d[6]: Condición Dirichlet en B.
@@ -47,15 +47,9 @@ I    M    P   O   R   T   A   N   T   E:
        En la calibración 1:
         d[5]: Condición Dirichlet en A.
         d[6]: Condición Dirichlet en B.
-        d[7]: El valor de f (influye en la d
-                             iagonal principal de la matriz A).
-        d[8]: El valor de de la solución analítica, debe ser igual a f . 
-        d[9]: Valor de -k / (h**2).
-        
-        
-        
-        En la calibración 2:
-        En la version 7 los anoto
+        d[7]: El valor de f (influye en la diagonal principal de la matriz A).
+        d[8]: El valor b de la solución analítica. Como lo desconocemos b=1
+
 """
 #####
 ### FUNCIÓN QUE PIDE DATOS AL USUARIO
@@ -68,14 +62,17 @@ def Titulo():
 def PrePar1():
     """
     Esta es la función que presenta y pide al usuario
-    los parámetros para resolver el problema deseado
-    x1 = Inicio del dominio
-    x2 = Final del dominio
+    los parámetros para resolver el problema 1 deseado
+    a = Inicio del dominio
+    b = Final del dominio
     N = Número de nodos o número de incógnitas
     L = Longitud total de la barra de acero (dominio)
     h = longitud de nodos
-    limx1 = Condición de Dirichlet en x1
-    limx2 = Condición de Dirichlet en x2
+    Ta = Condición de Dirichlet en a
+    Tb = Condición de Dirichlet en b
+    k = conductividad térmica
+    L = longitud 
+    h = segmento 
 
     Returns
     -------
@@ -124,16 +121,25 @@ def PrePar1():
 
 def PrePar2():
     """
+    Esta es la función que presenta y pide al usuario
+    los parámetros para resolver la calibración 1
     
-    
-    
+    a = Inicio del dominio
+    b = Final del dominio
+    N = Número de nodos o número de incógnitas
+    L = Longitud total de la barra de acero (dominio)
+    h = longitud de nodos
+    Ta = Condición de Dirichlet en a
+    Tb = Condición de Dirichlet en b
+    cf =  valor de f de la calibración
+    cb = valor b de la solución analítica, al desconocerla será 1
 
     Returns
     -------
-    datos : TYPE
-        DESCRIPTION.
+    datos : Vector con todos los datos introducidos por el usuario
 
     """
+    
     a = float(input('| Punto inicial       : a = '))
     b = float(input('| Punto final         : b = '))
     # Numero de incognitas y delta x1
@@ -220,7 +226,7 @@ def ReadF1(archivo):
 
 def ReadF2(archivo):
     """
-    Lee los parámetros desde un archivo de texto
+    Lee los parámetros desde un archivo de texto para la calibración 1
 
     Parameters
     ----------
@@ -252,13 +258,6 @@ def ReadF2(archivo):
         print('No existe el archivo')
         datos=[]
     return datos
-
-
-
-
-
-
-
 
 ### FUNCIÓN QUE CONSTRUYE LA MATRIZ A DE TAMAÑO NXN
 def MatrizA(d, diag):
@@ -408,13 +407,9 @@ def SolAna2(x,d):
     x: Espacio generado para evaluar la función
     
     d : Vector de datos del que se usaran las siguientes posiciones.
-    d[0]: Punto inicial a.
-    d[1]: Punto final b.
-    d[2]: Numero de nodos. 
-    d[3]: Longitud del segmento.
-    d[4]: Tamanio de la malla.
-    d[5]: Condición Dirichlet en A.
-    d[6]: Condición Dirichlet en B.
+
+    d[7]: Valor de f
+    d[8]: Valor de b
 
 
     Returns
@@ -468,6 +463,9 @@ def MatQ(d):
 
 def MatQC1(d):
     """
+    d : Vector de datos del que se usaran las siguientes posiciones.
+    d[2] = Número de nodos
+    
     Parameters
     ----------
  
@@ -483,9 +481,6 @@ def MatQC1(d):
     print('\n La matriz para Q es:') 
     print(np.array(q))
     return q
-
-
-
 
 ### MATRIZ DE CONDICIONES DE FRONTERA
 
@@ -708,3 +703,6 @@ def GrafSol(x,U,xs,sa):
     plt.legend(loc='upper left')
 #plt.set_cmap('hot')
     plt.show()
+    
+def imprArch(x,d):
+    outF = open 
