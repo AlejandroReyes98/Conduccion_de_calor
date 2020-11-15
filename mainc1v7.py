@@ -26,6 +26,9 @@ while opc < 4:
     if opc == 1:
         #datos=f.PrePar1()
         na=str(input('|Nombre del archivo: '))
+         #################################################   
+
+        nasal=str(input('Nombre del archivo de salida: '))
         datos=f.ReadF2(na)
         if datos:#Verifica si el archivo tiene datos
             opc=5
@@ -41,6 +44,8 @@ while opc < 4:
         exit()    
 # Se define nuestro sistema Lineal: Matriz A
 #MatrizA(N,diag,k)
+ 
+#################################################   
 
 hc1 = datos[4]
 fc1 = datos[7]
@@ -72,4 +77,13 @@ f.Error(datos,f.SolAna2(x,datos),U)
 #GRAFICA
 f.GrafSol(x,U,xs,sa)
 
+###############################################   
+
+#Creacion de lista de nodos
+Nodos = f.NumNodos(datos[2])
+
+#CREA ARCHIVO
+
+#SE AGREGÓ AL WHILE EL NOMBRE DEL ARCHIVO DE SALIDA
+f.writedat(nasal, Nodos, U)
 

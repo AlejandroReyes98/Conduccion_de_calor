@@ -118,6 +118,7 @@ def PrePar1():
     print('\n Datos = [a,b,N,L,h,Ta,Tb,k,q,r]')
     print(datos)
     return datos
+ #################################################   
 
 def PrePar2():
     """
@@ -221,6 +222,8 @@ def ReadF1(archivo):
         print('No existe el archivo')
         datos=[]
     return datos
+
+ #################################################   
 
 #Función que lee datos para la CALIBRACION 1
 
@@ -398,6 +401,9 @@ def SolAna1(x,d):
     """
     #Condicional para selección del problema
     return ((d[6] - d[5])/d[3] + d[8] /(2*d[7]) * (d[3] - x) ) * x + d[5]
+
+
+
 def SolAna2(x,d):
     """
     Aun tengo que ajustar aqui los parametros de entrada
@@ -458,7 +464,7 @@ def MatQ(d):
     print(np.array(q))
     return q
 
-############ 
+#################################################   
 ### MATRIZ Q PARA CALIBRACIÓN 1
 
 def MatQC1(d):
@@ -704,5 +710,43 @@ def GrafSol(x,U,xs,sa):
 #plt.set_cmap('hot')
     plt.show()
     
-def imprArch(x,d):
-    outF = open 
+ #################################################   
+def NumNodos(nodos):
+    """
+    Función que construye un arreglo que contiene la lista de los nodos 
+    Parameters
+    ----------
+    nodos : Valor de los nodos empleados en el problema
+
+    Returns
+    -------
+    n : arreglo en el qe se guarda de 0 a nodos + 2 (contenplando los extremos)
+
+    """
+    tam = nodos + 2
+    n = []
+    for i in range(tam): 
+        n.append(i)
+    return n
+        
+#################################################
+    
+def writedat(filename, N, U, Nprecision=2, Uprecision=5):
+    """
+    Función que genera el archivo de salida
+    Parameters
+    ----------
+    filename : Nombre del archivo de salida.
+    N : Arreglo con la lista de los nodos
+    U : Solución numérico
+    Nprecision : Precisión de los datos para N
+    Uprecision : Precisión de los datos para U
+
+    Returns
+    -------
+    Archivo de salida
+
+    """
+    with open(filename,'w') as f:
+        for a, b in zip(N, U):
+            print("%.*g\t%.*g" % (Nprecision, a, Uprecision, b), file=f)
